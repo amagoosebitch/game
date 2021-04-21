@@ -5,21 +5,26 @@ using UnityEngine;
 public class cameraFollowPlayerScript : MonoBehaviour
 {
     public GameObject player;
-    
+    private bool follow = true;
     void Start()
     {
-        //player = GameObject.FindGameObjectWithTag("player");
+        player = GameObject.FindGameObjectWithTag("Player");
     }
 
     void Update()
     {
-        cameraFollow();
+        if(follow == true)
+            cameraFollow();
+    }
+
+    void setPlayer(bool setting)
+    {
+        follow = setting;
     }
 
     void cameraFollow()
     {
-        var newPosition = new Vector3(
-            player.transform.position.x, player.transform.position.y, this.transform.position.z);
-        this.transform.position = newPosition;
+        transform.position = new Vector3(
+            player.transform.position.x, player.transform.position.y, transform.position.z);
     }
 }

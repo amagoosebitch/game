@@ -4,21 +4,41 @@ using UnityEngine;
 
 public class playerMoveScript : MonoBehaviour
 {
-    public GameObject player;
-
     public float speed;
-    
+    private Rigidbody2D rid;
+    private Vector2 vec;
     void Start()
     {
-        
+        rid = GetComponent<Rigidbody2D>();
     }
 
     void Update()
     {
-        var h = Input.GetAxis("Horizontal");
-        var v = Input.GetAxis("Vertical");
-        player.transform.Translate(
-            new Vector3(h*speed*Time.deltaTime, v*speed*Time.deltaTime, 0));
-        
+        vec.x = Input.GetAxis("Horizontal");
+        vec.y = Input.GetAxis("Vertical");
+        rid.velocity = new Vector2(vec.x * speed, vec.y * speed);
     }
+
+    /*void Move()
+    {
+        if (Input.GetKey(KeyCode.W))
+        {
+            transform.Translate(Vector3.up * speed * Time.deltaTime, Space.World);
+        }
+        
+        if (Input.GetKey(KeyCode.S))
+        {
+            transform.Translate(Vector3.down * speed * Time.deltaTime, Space.World);
+        }
+        
+        if (Input.GetKey(KeyCode.A))
+        {
+            transform.Translate(Vector3.left * speed * Time.deltaTime, Space.World);
+        }
+        
+        if (Input.GetKey(KeyCode.D))
+        {
+            transform.Translate(Vector3.right * speed * Time.deltaTime, Space.World);
+        }
+    }*/
 }
