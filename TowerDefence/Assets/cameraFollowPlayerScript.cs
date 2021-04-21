@@ -13,13 +13,32 @@ public class cameraFollowPlayerScript : MonoBehaviour
 
     void Update()
     {
-        if(follow == true)
+        if (Input.GetKey(KeyCode.LeftShift))
+        {
+            follow = false;
+        }
+        else
+        {
+            follow = true;
+        }
+
+        if (follow == true)
+        {
             cameraFollow();
+        }
+        else
+        {
+            ShiftLook();
+        }
     }
 
-    void setPlayer(bool setting)
+    private void ShiftLook()
     {
-        follow = setting;
+        var direction = Camera.main.ScreenToWorldPoint(
+            new Vector3(Input.mousePosition.x, Input.mousePosition.y, -10)) - transform.position;
+        if(player.GetComponent<SpriteRenderer>().isVisible)
+            transform.Translate(direction*2*Time.deltaTime);
+        
     }
 
     void cameraFollow()

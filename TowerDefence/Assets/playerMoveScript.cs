@@ -7,6 +7,7 @@ public class playerMoveScript : MonoBehaviour
     public float speed;
     private Rigidbody2D rid;
     private Vector2 vec;
+    private bool opportunityAcceleration = true;
     void Start()
     {
         rid = GetComponent<Rigidbody2D>();
@@ -14,31 +15,33 @@ public class playerMoveScript : MonoBehaviour
 
     void Update()
     {
+        Move();
+        if (Input.GetKey(KeyCode.Space) && opportunityAcceleration)
+        {
+            MakeAcceleration();
+        }
+    }
+
+    private void MakeAcceleration()
+    {
+        StartCoroutine(Acceleration(speed));
+    }
+
+    IEnumerator Acceleration(float currentSpeed)
+    {
+        speed = currentSpeed * 2;
+        opportunityAcceleration = false;
+        yield return new WaitForSeconds(5);
+        speed = currentSpeed;
+        yield return new WaitForSeconds(15);
+        opportunityAcceleration = true;
+
+    }
+
+    void Move()
+    {
         vec.x = Input.GetAxis("Horizontal");
         vec.y = Input.GetAxis("Vertical");
         rid.velocity = new Vector2(vec.x * speed, vec.y * speed);
     }
-
-    /*void Move()
-    {
-        if (Input.GetKey(KeyCode.W))
-        {
-            transform.Translate(Vector3.up * speed * Time.deltaTime, Space.World);
-        }
-        
-        if (Input.GetKey(KeyCode.S))
-        {
-            transform.Translate(Vector3.down * speed * Time.deltaTime, Space.World);
-        }
-        
-        if (Input.GetKey(KeyCode.A))
-        {
-            transform.Translate(Vector3.left * speed * Time.deltaTime, Space.World);
-        }
-        
-        if (Input.GetKey(KeyCode.D))
-        {
-            transform.Translate(Vector3.right * speed * Time.deltaTime, Space.World);
-        }
-    }*/
 }
