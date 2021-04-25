@@ -52,11 +52,13 @@
     <ImplicitlyExpandDesignTimeFacades>false</ImplicitlyExpandDesignTimeFacades>
   </PropertyGroup>
   <ItemGroup>
-     <Compile Include="Assets\FollowCursorScript.cs" />
-     <Compile Include="Assets\playerMoveScript.cs" />
-     <Compile Include="Assets\cameraFollowPlayerScript.cs" />
-     <Compile Include="Assets\Shooter.cs" />
-     <Compile Include="Assets\BulletMovement.cs" />
+     <Compile Include="Assets\Scripts\FollowCursorScript.cs" />
+     <Compile Include="Assets\Scripts\Shooter.cs" />
+     <Compile Include="Assets\Scripts\BulletMovement.cs" />
+     <Compile Include="Assets\Scripts\playerMoveScript.cs" />
+     <Compile Include="Assets\Scripts\cameraFollowPlayerScript.cs" />
+     <Compile Include="Assets\Scripts\EnemyBehavior.cs" />
+     <Compile Include="Assets\Scripts\Shrine.cs" />
  <Reference Include="UnityEngine">
  <HintPath>C:/Program Files/Unity/Hub/Editor/2020.3.4f1/Editor/Data/Managed/UnityEngine/UnityEngine.dll</HintPath>
  </Reference>
