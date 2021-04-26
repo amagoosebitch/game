@@ -7,17 +7,23 @@ public class BulletMovement : MonoBehaviour
 {
 
     public float speed;
+    public int damage = 10;
 
     public Rigidbody2D rb;
     // Start is called before the first frame update
     void Start()
     {
-        rb.velocity = transform.right * speed;
+        if (rb.name != "player")
+            rb.velocity = transform.right * speed;
     }
 
-    private void OnTriggerEnter2D(Collider2D other)
+    private void OnTriggerEnter2D(Collider2D hitInfo)
     {
-        Debug.Log(other.name);
+        EnemyBehavior enemy = hitInfo.GetComponent<EnemyBehavior>();
+        if (enemy != null)
+        {
+            enemy.TakeDamage(damage);
+        }
         Destroy(gameObject);
     }
 
