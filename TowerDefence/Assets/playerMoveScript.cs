@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -13,7 +14,7 @@ public class playerMoveScript : MonoBehaviour
         rid = GetComponent<Rigidbody2D>();
     }
 
-    void Update()
+    void FixedUpdate()
     {
         Move();
         if (Input.GetKey(KeyCode.Space) && opportunityAcceleration)
@@ -40,6 +41,7 @@ public class playerMoveScript : MonoBehaviour
 
     void Move()
     {
+        rid.angularVelocity = 0;
         vec.x = Input.GetAxis("Horizontal");
         vec.y = Input.GetAxis("Vertical");
         rid.velocity = new Vector2(vec.x * speed, vec.y * speed);

@@ -19,7 +19,6 @@ public class BulletMovement : MonoBehaviour
     {
         Debug.Log(other.name);
         Destroy(gameObject);
-        
     }
 
     // Update is called once per frame
