@@ -6,26 +6,45 @@ public class Shooter : MonoBehaviour
 {
 
     public Transform firePoint;
+    Coroutine fireSequence;
+    private float fireDelay = 0.1f;
+    public int countBullets;
+    private float recharge = 2.0f;
+    private int currentBullets;
 
     public GameObject bullet;
     // Start is called before the first frame update
     void Start()
     {
-        
+        currentBullets = countBullets;
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetMouseButton(0))
+        if (Input.GetMouseButtonDown(0))
         {
-            Shoot();
+            fireSequence = StartCoroutine(Shoot());
+        }
+
+        if (Input.GetMouseButtonUp(0))
+        {
+            StopCoroutine(fireSequence);
         }
     }
 
-    void Shoot()
+    IEnumerator Shoot()
     {
-        Instantiate(bullet, firePoint.position, firePoint.rotation);
-        //yield return new WaitForSeconds(0.1f);
+        while (true)
+        {
+            Instantiate(bullet, firePoint.position, firePoint.rotation);
+            currentBullets--;
+            yield return new WaitForSeconds(fireDelay);
+            if (countBullets == 0)
+            {
+                countBullets = countBullets;
+                yield return new WaitForSeconds(recharge);
+            }
+        }
     }
 }
