@@ -7,7 +7,7 @@ using UnityEngine.EventSystems;
 public class EnemyBehavior : MonoBehaviour
 {
     public int health = 10;
-    public GameObject shrine;
+    private GameObject shrine;
     public float speed = 3f;
     public int damage = 10;
     public GameObject self;
@@ -61,7 +61,6 @@ public class EnemyBehavior : MonoBehaviour
         {
             shrine.TakeDamage(damage);
             Destroy(self);
-            
         }
     }
 }
