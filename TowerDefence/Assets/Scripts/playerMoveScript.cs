@@ -42,8 +42,8 @@ public class playerMoveScript : MonoBehaviour
     void Move()
     {
         rid.angularVelocity = 0;
-        vec.x = Input.GetAxis("Horizontal");
-        vec.y = Input.GetAxis("Vertical");
+        vec.x = Input.GetAxisRaw("Horizontal");
+        vec.y = Input.GetAxisRaw("Vertical");
         rid.velocity = new Vector2(vec.x * speed, vec.y * speed);
     }
 }
