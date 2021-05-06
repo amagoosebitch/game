@@ -22,8 +22,11 @@ public class Shooter : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        
         if (Input.GetMouseButtonDown(0))
         {
+            if (currentBullets <= 0)
+                StartCoroutine(Recharge());
             fireSequence = StartCoroutine(Shoot());
         }
 
@@ -33,18 +36,25 @@ public class Shooter : MonoBehaviour
         }
     }
 
+    IEnumerator Recharge()
+    {
+        currentBullets = countBullets;
+        yield return new WaitForSeconds(recharge);
+    }
+
     IEnumerator Shoot()
     {
         while (true)
         {
+            if (currentBullets <= 0)
+            {
+                currentBullets = countBullets;
+                yield return new WaitForSeconds(recharge);
+            }
             Instantiate(bullet, firePoint.position, firePoint.rotation);
             currentBullets--;
             yield return new WaitForSeconds(fireDelay);
-            if (countBullets == 0)
-            {
-                countBullets = countBullets;
-                yield return new WaitForSeconds(recharge);
-            }
         }
     }
+    
 }
