@@ -13,14 +13,12 @@ public class Spawner : MonoBehaviour
     private float expectation;
     private int aliveMobs;
     
-    // Start is called before the first frame update
     void Start()
     {
         expectation = 15;
         aliveMobs = mobsCount;
     }
 
-    // Update is called once per frame
     void Update()
     {
         if(!created)

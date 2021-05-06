@@ -13,13 +13,11 @@ public class Shooter : MonoBehaviour
     private int currentBullets;
 
     public GameObject bullet;
-    // Start is called before the first frame update
     void Start()
     {
         currentBullets = countBullets;
     }
 
-    // Update is called once per frame
     void Update()
     {
         
