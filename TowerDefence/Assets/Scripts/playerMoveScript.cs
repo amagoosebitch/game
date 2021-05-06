@@ -30,7 +30,7 @@ public class playerMoveScript : MonoBehaviour
 
     IEnumerator Acceleration(float currentSpeed)
     {
-        speed = currentSpeed * 2;
+        speed = currentSpeed * 1.5f;
         opportunityAcceleration = false;
         yield return new WaitForSeconds(5);
         speed = currentSpeed;

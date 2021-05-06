@@ -36,6 +36,8 @@ public class Spawner : MonoBehaviour
         {
             Instantiate(mob, new Vector3(-30 + Random.Range(0, 5), 
                 32 - Random.Range(0, 5), 0), Quaternion.identity);
+            Instantiate(mob, new Vector3(47 - Random.Range(0, 5), 
+                32 - Random.Range(0, 5), 0), Quaternion.identity);
         }
 
         aliveMobs -= mobsCount / 3;
