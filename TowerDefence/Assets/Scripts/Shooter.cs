@@ -16,7 +16,7 @@ public class Shooter : MonoBehaviour
     public GameObject bullet;
     void Start()
     {
-        currentBullets = 5;
+        currentBullets = countBullets;
         shootingFlag = true;
     }
 
