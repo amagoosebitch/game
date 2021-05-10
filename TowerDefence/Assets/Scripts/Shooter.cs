@@ -11,33 +11,40 @@ public class Shooter : MonoBehaviour
     public int countBullets;
     private float recharge = 2.0f;
     private int currentBullets;
+    private bool shootingFlag;
 
     public GameObject bullet;
     void Start()
     {
-        currentBullets = countBullets;
+        currentBullets = 5;
+        shootingFlag = true;
     }
 
     void Update()
     {
         
-        if (Input.GetMouseButtonDown(0))
+        if (shootingFlag && Input.GetMouseButtonDown(0))
         {
-            if (currentBullets <= 0)
-                StartCoroutine(Recharge());
             fireSequence = StartCoroutine(Shoot());
         }
 
-        if (Input.GetMouseButtonUp(0))
+        if (Input.GetMouseButtonUp(0) && fireSequence != null)
         {
             StopCoroutine(fireSequence);
+        }
+
+        if (Input.GetKey(KeyCode.R))
+        {
+            StartCoroutine(Recharge());
         }
     }
 
     IEnumerator Recharge()
     {
+        shootingFlag = false;
         currentBullets = countBullets;
         yield return new WaitForSeconds(recharge);
+        shootingFlag = true;
     }
 
     IEnumerator Shoot()
@@ -45,10 +52,7 @@ public class Shooter : MonoBehaviour
         while (true)
         {
             if (currentBullets <= 0)
-            {
-                currentBullets = countBullets;
-                yield return new WaitForSeconds(recharge);
-            }
+                yield break;
             Instantiate(bullet, firePoint.position, firePoint.rotation);
             currentBullets--;
             yield return new WaitForSeconds(fireDelay);
