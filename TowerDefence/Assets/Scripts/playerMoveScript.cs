@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class playerMoveScript : MonoBehaviour
 {
@@ -9,6 +10,9 @@ public class playerMoveScript : MonoBehaviour
     private Rigidbody2D rid;
     private Vector2 vec;
     private bool opportunityAcceleration = true;
+    public int health = 100;
+
+    [SerializeField] public Text hp;
     void Start()
     {
         rid = GetComponent<Rigidbody2D>();
@@ -21,6 +25,8 @@ public class playerMoveScript : MonoBehaviour
         {
             MakeAcceleration();
         }
+
+        hp.text = health + " / " + "100";
     }
 
     private void MakeAcceleration()
@@ -45,5 +51,18 @@ public class playerMoveScript : MonoBehaviour
         vec.x = Input.GetAxisRaw("Horizontal");
         vec.y = Input.GetAxisRaw("Vertical");
         rid.velocity = new Vector2(vec.x * speed, vec.y * speed);
+    }
+    
+    public void TakeDamage(int damage)
+    {
+        health -= damage;
+        if (health <= 0)
+            Die();
+    }
+    
+    void Die()
+    {
+        Destroy(gameObject);
+        Debug.Log("game over");
     }
 }
