@@ -56,11 +56,6 @@ public class EnemyBehavior : MonoBehaviour
     private void OnTriggerEnter2D (Collider2D hitInfo)
     {
         //Debug.Log(hitInfo.name);
-        playerMoveScript enemy = hitInfo.GetComponent<playerMoveScript>();
-        if (enemy != null)
-        { 
-            enemy.TakeDamage(damage);
-        }
         Shrine shrine = hitInfo.GetComponent<Shrine>();
         if (shrine != null)
         {

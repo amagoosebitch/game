@@ -13,7 +13,6 @@ GameObject:
   - component: {fileID: 2673589872649790132}
   - component: {fileID: 2673589872649790134}
   - component: {fileID: 2673589872649790135}
-  - component: {fileID: 5869271062286141593}
   m_Layer: 0
   m_Name: AlgemEnemy
   m_TagString: Untagged
@@ -100,7 +99,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   health: 50
   speed: 3
-  damage: 10
+  damage: 20
   self: {fileID: 0}
 --- !u!70 &2673589872649790134
 CapsuleCollider2D:
@@ -139,16 +138,3 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
---- !u!114 &5869271062286141593
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2673589872649790131}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 550db4e6c29a1e24399ab29bec5548c0, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Vector: {fileID: 7145737955405316435, guid: 6237f1d53bb9ea74c8e1844aa67cbf90, type: 3}
