@@ -41,7 +41,7 @@ public class Shooter : MonoBehaviour
             StartCoroutine(Recharge());
         }
 
-        ammoCount.text = currentBullets + " / " + countBullets;
+        ammoCount.text = currentBullets + " / " + countBullets ;
     }
 
     IEnumerator Recharge()
