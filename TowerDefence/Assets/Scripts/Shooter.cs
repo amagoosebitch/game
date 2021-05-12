@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Shooter : MonoBehaviour
 {
@@ -12,6 +13,8 @@ public class Shooter : MonoBehaviour
     private float recharge = 2.0f;
     private int currentBullets;
     private bool shootingFlag;
+
+    [SerializeField] public Text ammoCount;
 
     public GameObject bullet;
     void Start()
@@ -37,13 +40,15 @@ public class Shooter : MonoBehaviour
         {
             StartCoroutine(Recharge());
         }
+
+        ammoCount.text = currentBullets + " / " + countBullets ;
     }
 
     IEnumerator Recharge()
     {
         shootingFlag = false;
-        currentBullets = countBullets;
         yield return new WaitForSeconds(recharge);
+        currentBullets = countBullets;
         shootingFlag = true;
     }
 
