@@ -12,6 +12,7 @@ public class EnemyBehavior : MonoBehaviour
     public int damage = 10;
     public GameObject self;
     private Vector3 direction;
+    public GameObject miniSnakes;
     void Start()
     {
         self = gameObject;
@@ -50,6 +51,11 @@ public class EnemyBehavior : MonoBehaviour
 
     void Die()
     {
+        if (self.CompareTag("BigSnake"))
+        {
+            for(int i = 0; i < 20; ++i)
+                Instantiate(miniSnakes, self.transform.position, Quaternion.identity);
+        }
         Destroy(self);
     }
 
