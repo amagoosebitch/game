@@ -38,6 +38,7 @@ public class Spawner : MonoBehaviour
                 32 - Random.Range(0, 5), 0), Quaternion.identity);
             Instantiate(SmallSnake, new Vector3(47 - Random.Range(0, 5), 
                 32 - Random.Range(0, 5), 0), Quaternion.identity);
+            aliveMobs -= 2;
         }
 
         for (int i = 0; i < 2; ++i)
@@ -46,9 +47,9 @@ public class Spawner : MonoBehaviour
                 -29 + Random.Range(0, 5), 0), Quaternion.identity);
             Instantiate(BigSnake, new Vector3(45 - Random.Range(0, 5), 
                 -29 + Random.Range(0, 5), 0), Quaternion.identity);
+            aliveMobs -= 2;
         }
-
-        aliveMobs -= mobsCount / 3;
+        
         yield return new WaitForSeconds(expectation);
         created = false;
     }
