@@ -138,4 +138,4 @@ MonoBehaviour:
   speed: 1
   damage: 10
   self: {fileID: 3343644854470151401}
-  miniSnakes: {fileID: 235683947936987971, guid: 4c82f971134032941ab570f3b50f273d, type: 3}
+  miniSnakes: {fileID: 510848856199209960, guid: 5d4e801d83413adffb101dfcc30ab717, type: 3}
