@@ -13,6 +13,8 @@ public class EnemyBehavior : MonoBehaviour
     public GameObject self;
     private Vector3 direction;
     public GameObject miniSnakes;
+    public AudioClip deadSound;
+    
     void Start()
     {
         self = gameObject;
@@ -46,7 +48,10 @@ public class EnemyBehavior : MonoBehaviour
     {
         health -= damage;
         if (health <= 0)
+        {
             Die();
+        }
+        
     }
 
     void Die()
@@ -57,6 +62,11 @@ public class EnemyBehavior : MonoBehaviour
                 Instantiate(miniSnakes, self.transform.position, Quaternion.identity);
         }
         Destroy(self);
+    }
+
+    void MakeSoundDead()
+    {
+        GetComponent<AudioSource>().PlayOneShot(deadSound);
     }
 
     private void OnTriggerEnter2D (Collider2D hitInfo)

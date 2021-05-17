@@ -13,6 +13,7 @@ public class Shooter : MonoBehaviour
     private float recharge = 2.0f;
     private int currentBullets;
     private bool shootingFlag;
+    public AudioClip fireSound;
 
     [SerializeField] public Text ammoCount;
 
@@ -59,6 +60,7 @@ public class Shooter : MonoBehaviour
             if (currentBullets <= 0)
                 yield break;
             Instantiate(bullet, firePoint.position, firePoint.rotation);
+            GetComponent<AudioSource>().PlayOneShot(fireSound);
             currentBullets--;
             yield return new WaitForSeconds(fireDelay);
         }

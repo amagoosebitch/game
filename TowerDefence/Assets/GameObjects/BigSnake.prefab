@@ -140,6 +140,7 @@ MonoBehaviour:
   damage: 100
   self: {fileID: 3343644854470151401}
   miniSnakes: {fileID: 510848856199209960, guid: 5d4e801d83413adffb101dfcc30ab717, type: 3}
+  deadSound: {fileID: 8300000, guid: 3c5b76fc0c4e04a329cfe2ba8c9a0fd5, type: 3}
 --- !u!1 &5989962819829508299
 GameObject:
   m_ObjectHideFlags: 0
