@@ -14,17 +14,23 @@ public class EnemyBehavior : MonoBehaviour
     private Vector3 direction;
     public GameObject miniSnakes;
     public AudioClip deadSound;
+    private bool isDead;
     
     void Start()
     {
         self = gameObject;
         shrine = GameObject.Find("Shrine");
+        isDead = false;
     }
 
-    // Update is called once per frame
     void Update()
     {
         Move();
+        if (isDead)
+        {
+            GetComponent<AudioSource>().PlayOneShot(deadSound);
+            isDead = false;
+        }
     }
 
     void Move()
@@ -56,17 +62,13 @@ public class EnemyBehavior : MonoBehaviour
 
     void Die()
     {
+        isDead = true;
         if (self.CompareTag("BigSnake"))
         {
             for(int i = 0; i < 20; ++i)
                 Instantiate(miniSnakes, self.transform.position, Quaternion.identity);
         }
         Destroy(self);
-    }
-
-    void MakeSoundDead()
-    {
-        GetComponent<AudioSource>().PlayOneShot(deadSound);
     }
 
     private void OnTriggerEnter2D (Collider2D hitInfo)
