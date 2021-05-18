@@ -1,18 +1,30 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.IO;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
 public class EnemyBehavior : MonoBehaviour
 {
-    public int health = 10;
-    private GameObject shrine;
     public float speed = 3f;
+    public int health = 10;
     public int damage = 10;
-    public GameObject self;
+    
+    private GameObject shrine;
+    private Vector3 pos;
     private Vector3 direction;
+    Vector2 blockDirection,escapeDirection;
+    RaycastHit2D hit;
+    private LayerMask _layerMask = 1 << 3;
+    private float collisionDistance = 1f;
+    private bool blocked = false;
+    
+    
+    public GameObject self;
+    
     public GameObject miniSnakes;
+    
     public AudioClip deadSound;
     private bool isDead;
     
@@ -21,6 +33,7 @@ public class EnemyBehavior : MonoBehaviour
         self = gameObject;
         shrine = GameObject.Find("Shrine");
         isDead = false;
+        
     }
 
     void Update()
@@ -35,19 +48,13 @@ public class EnemyBehavior : MonoBehaviour
 
     void Move()
     {
-        direction = shrine.transform.position - self.transform.position;
-        RaycastHit2D way = Physics2D.Raycast(self.transform.position, direction);
-        Vector3 vec = new Vector3(direction.x, direction.y, 0);
-        vec.Normalize();
-        transform.position =  transform.position + speed *Time.deltaTime * vec;
-        
-        // if (way)
-        // {
-        //     Wall obj = way.transform.GetComponent<Wall>();
-        //     Debug.Log(obj.name);
-        // }
-        
-         
+        // pos = (Vector2)self.transform.position;
+        // var direction = (Vector2)(shrine.transform.position - pos).normalized;
+        // RaycastHit2D way = Physics2D.Raycast(pos,direction, colllisioDistance, _layerMask);
+        // if (!(way.collider is null))
+        //     Debug.Log(way.collider.name);
+        // Vector3 vec = direction.normalized;
+        transform.position =  transform.position + speed *Time.deltaTime * RayPath(shrine.transform);
     }
 
     public void TakeDamage(int damage)
@@ -85,5 +92,49 @@ public class EnemyBehavior : MonoBehaviour
             shrine.TakeDamage(damage);
             Destroy(self);
         }
+    }
+    
+    Vector3 RayPath(Transform target)
+    {
+        Vector2 position = transform.position;
+        Vector2 direction = ((Vector2)target.position- position).normalized;
+
+        if (!blocked)
+        {
+            hit = Physics2D.Raycast(position, direction, collisionDistance, _layerMask);
+            if (!(hit.collider is null))
+            {
+                if (hit.transform == target) return direction;
+                
+                if(hit.distance < collisionDistance)
+                {
+                    blocked = true;
+                    blockDirection = -hit.normal;
+                    var normal = new Vector2(-direction.y, direction.x); 
+                    escapeDirection = normal;
+                    return escapeDirection;
+                }
+            }
+
+            return direction;
+        }
+
+        hit = Physics2D.Linecast(position, target.position);
+        if (!(hit.collider is null))
+        {
+            if(hit.transform == target) {blocked = false; return direction;}
+        }
+        
+        if(Physics2D.Raycast(position, blockDirection, collisionDistance,_layerMask ))
+        {
+            if(Physics2D.Raycast(position, escapeDirection, collisionDistance,_layerMask))
+                escapeDirection = -escapeDirection;
+            return escapeDirection;
+        }
+        
+        if(Physics2D.Raycast(position, direction, collisionDistance,_layerMask)) return escapeDirection;
+        
+        blocked = false;
+        return direction;
     }
 }

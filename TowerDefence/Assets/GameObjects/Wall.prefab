@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 5247742575817699986}
   - component: {fileID: 5247742575817699985}
   - component: {fileID: 794274996048633993}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Wall
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -72,7 +72,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 10
+  m_SortingOrder: 3
   m_Sprite: {fileID: -4269030026201786652, guid: 9ec434c2f4f829febbc77f3299951350, type: 3}
   m_Color: {r: 0.29803923, g: 0.29803923, b: 0.29803923, a: 1}
   m_FlipX: 0
