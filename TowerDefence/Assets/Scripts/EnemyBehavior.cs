@@ -127,8 +127,6 @@ public class EnemyBehavior : MonoBehaviour
         
         if(Physics2D.Raycast(position, blockDirection, collisionDistance,_layerMask ))
         {
-            if(Physics2D.Raycast(position, escapeDirection, collisionDistance,_layerMask))
-                escapeDirection = -escapeDirection;
             return escapeDirection;
         }
         
