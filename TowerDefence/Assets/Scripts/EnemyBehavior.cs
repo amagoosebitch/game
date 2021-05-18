@@ -17,8 +17,10 @@ public class EnemyBehavior : MonoBehaviour
     Vector2 blockDirection,escapeDirection;
     RaycastHit2D hit;
     private LayerMask _layerMask = 1 << 3;
-    private float collisionDistance = 1f;
+    private float collisionDistance = 0.5f;
     private bool blocked = false;
+
+    private Vector2[] dirrections = new[] {Vector2.down, Vector2.left, Vector2.up, Vector2.right};
     
     
     public GameObject self;
@@ -110,8 +112,30 @@ public class EnemyBehavior : MonoBehaviour
                 {
                     blocked = true;
                     blockDirection = -hit.normal;
-                    var normal = new Vector2(-direction.y, direction.x); 
-                    escapeDirection = normal;
+                    var offset = -1;
+                    var upDot = Vector2.Dot(direction, Vector2.up);
+                    var rightDot = Vector2.Dot(direction, Vector2.right);
+                    if (upDot*rightDot >= 0)
+                        if (upDot <= 0)
+                            offset = 0;
+                        else
+                            offset = 2;
+                    else
+                        if (upDot <= 0)
+                            offset = 1;
+                        else 
+                            offset = 3;
+                    for (var i = 0; i < 4; i++)
+                    {
+                        escapeDirection = Vector2.down;
+                        var temp = Physics2D.Raycast(position-0.1f*dirrections[(i + offset) % 4], 
+                            dirrections[(i + offset) % 4], collisionDistance, _layerMask);
+                        if (temp.collider is null)
+                        {
+                            escapeDirection = dirrections[(i + offset) % 4];
+                        }
+                    }
+
                     return escapeDirection;
                 }
             }
@@ -119,7 +143,7 @@ public class EnemyBehavior : MonoBehaviour
             return direction;
         }
 
-        hit = Physics2D.Linecast(position, target.position);
+        hit = Physics2D.Linecast(position, target.position, _layerMask);
         if (!(hit.collider is null))
         {
             if(hit.transform == target) {blocked = false; return direction;}
