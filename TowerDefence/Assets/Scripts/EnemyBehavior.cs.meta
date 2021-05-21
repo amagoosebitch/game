@@ -3,7 +3,10 @@ guid: ef09b280286664b42a8254fefbd4f40a
 MonoImporter:
   externalObjects: {}
   serializedVersion: 2
-  defaultReferences: []
+  defaultReferences:
+  - self: {instanceID: 0}
+  - miniSnakes: {instanceID: 0}
+  - deadSound: {fileID: 8300000, guid: 3c5b76fc0c4e04a329cfe2ba8c9a0fd5, type: 3}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 

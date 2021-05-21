@@ -17,7 +17,7 @@ public class EnemyBehavior : MonoBehaviour
     Vector2 blockDirection,escapeDirection;
     RaycastHit2D hit;
     private LayerMask _layerMask = 1 << 3;
-    private float collisionDistance = 0.5f;
+    private float collisionDistance = 0.35f;
     private bool blocked = false;
 
     private Vector2[] dirrections = new[] {Vector2.down, Vector2.left, Vector2.up, Vector2.right};
@@ -35,7 +35,6 @@ public class EnemyBehavior : MonoBehaviour
         self = gameObject;
         shrine = GameObject.Find("Shrine");
         isDead = false;
-        
     }
 
     void Update()
@@ -127,8 +126,8 @@ public class EnemyBehavior : MonoBehaviour
                             offset = 3;
                     for (var i = 0; i < 4; i++)
                     {
-                        escapeDirection = Vector2.down;
-                        var temp = Physics2D.Raycast(position-0.1f*dirrections[(i + offset) % 4], 
+                        escapeDirection = Vector2.left;
+                        var temp = Physics2D.Raycast(position, 
                             dirrections[(i + offset) % 4], collisionDistance, _layerMask);
                         if (temp.collider is null)
                         {
