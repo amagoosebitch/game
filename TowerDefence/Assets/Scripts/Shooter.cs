@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Shooter : MonoBehaviour
 {
@@ -11,40 +12,58 @@ public class Shooter : MonoBehaviour
     public int countBullets;
     private float recharge = 2.0f;
     private int currentBullets;
+    private bool shootingFlag;
+    public AudioClip fireSound;
+
+    [SerializeField] public Text ammoCount;
 
     public GameObject bullet;
-    // Start is called before the first frame update
     void Start()
     {
         currentBullets = countBullets;
+        shootingFlag = true;
     }
 
-    // Update is called once per frame
     void Update()
     {
-        if (Input.GetMouseButtonDown(0))
+        
+        if (shootingFlag && Input.GetMouseButtonDown(0))
         {
             fireSequence = StartCoroutine(Shoot());
         }
 
-        if (Input.GetMouseButtonUp(0))
+        if (Input.GetMouseButtonUp(0) && fireSequence != null)
         {
             StopCoroutine(fireSequence);
         }
+
+        if (Input.GetKey(KeyCode.R))
+        {
+            StartCoroutine(Recharge());
+        }
+
+        ammoCount.text = currentBullets + " / " + countBullets;
+    }
+
+    IEnumerator Recharge()
+    {
+        shootingFlag = false;
+        yield return new WaitForSeconds(recharge);
+        currentBullets = countBullets;
+        shootingFlag = true;
     }
 
     IEnumerator Shoot()
     {
         while (true)
         {
+            if (currentBullets <= 0)
+                yield break;
             Instantiate(bullet, firePoint.position, firePoint.rotation);
+            GetComponent<AudioSource>().PlayOneShot(fireSound);
             currentBullets--;
             yield return new WaitForSeconds(fireDelay);
-            if (countBullets == 0)
-            {
-                countBullets = countBullets;
-                yield return new WaitForSeconds(recharge);
-            }
         }
     }
+    
 }
