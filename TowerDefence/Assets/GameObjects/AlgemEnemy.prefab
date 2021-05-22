@@ -212,11 +212,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ef09b280286664b42a8254fefbd4f40a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  health: 50
   speed: 3
-  damage: 10
+  health: 50
+  damage: 50
   self: {fileID: 0}
   miniSnakes: {fileID: 0}
+  deadSound: {fileID: 0}
 --- !u!70 &7489771767153739476
 CapsuleCollider2D:
   m_ObjectHideFlags: 0
