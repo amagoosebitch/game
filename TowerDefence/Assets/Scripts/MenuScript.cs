@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -5,6 +6,13 @@ using UnityEngine.SceneManagement;
 
 public class MenuScript : MonoBehaviour
 {
+    public AudioClip sound;
+    public AudioSource source;
+    void Start()
+    {
+        source.PlayOneShot(sound);
+    }
+
     public void PlayGame()
     {
         SceneManager.LoadScene("SampleScene");
