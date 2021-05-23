@@ -135,12 +135,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ef09b280286664b42a8254fefbd4f40a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  health: 50
   speed: 1
-  damage: 100
+  health: 50
+  damage: 50
   self: {fileID: 3343644854470151401}
   miniSnakes: {fileID: 510848856199209960, guid: 5d4e801d83413adffb101dfcc30ab717, type: 3}
   deadSound: {fileID: 8300000, guid: 3c5b76fc0c4e04a329cfe2ba8c9a0fd5, type: 3}
+  heal: {fileID: 1246151427771843639, guid: 0d8933b5ca8d4994db171fbb02c29baf, type: 3}
 --- !u!1 &5989962819829508299
 GameObject:
   m_ObjectHideFlags: 0
