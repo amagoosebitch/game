@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.Serialization;
 using Random = UnityEngine.Random;
 
@@ -33,15 +34,21 @@ public class Spawner : MonoBehaviour
         yield return new WaitForSeconds(expectation);
         flagForStart = true;
         expectation += 10;
-        waveCount = 1;
+        waveCount = 0;
     }
 
     void Update()
     {
-        if(!created && flagForStart)
+        if (!created && flagForStart)
+        {
             crt = StartCoroutine(Spawn());
-        if(waveCount == 5)
+        }
+        if (waveCount == 5)
+        {
             StopCoroutine(crt);
+            SceneManager.LoadScene("Finish");
+        }
+        
     }
     
     

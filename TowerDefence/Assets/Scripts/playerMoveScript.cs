@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class playerMoveScript : MonoBehaviour
@@ -80,6 +81,6 @@ public class playerMoveScript : MonoBehaviour
     void Die()
     {
         Destroy(gameObject);
-        Debug.Log("game over");
+        SceneManager.LoadScene("Fail");
     }
 }
