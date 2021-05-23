@@ -24,40 +24,21 @@ public class EnemyBehavior : MonoBehaviour
     
     
     public GameObject self;
-    
     public GameObject miniSnakes;
-    
-    public AudioClip deadSound;
-    private bool isDead;
+
+    public GameObject heal;
     
     void Start()
     {
         self = gameObject;
         shrine = GameObject.Find("Shrine");
-        isDead = false;
     }
 
     void Update()
     {
-        Move();
-        if (isDead)
-        {
-            GetComponent<AudioSource>().PlayOneShot(deadSound);
-            isDead = false;
-        }
+        transform.position =  transform.position + speed * Time.deltaTime * RayPath(shrine.transform);
     }
-
-    void Move()
-    {
-        // pos = (Vector2)self.transform.position;
-        // var direction = (Vector2)(shrine.transform.position - pos).normalized;
-        // RaycastHit2D way = Physics2D.Raycast(pos,direction, colllisioDistance, _layerMask);
-        // if (!(way.collider is null))
-        //     Debug.Log(way.collider.name);
-        // Vector3 vec = direction.normalized;
-        transform.position =  transform.position + speed *Time.deltaTime * RayPath(shrine.transform);
-    }
-
+    
     public void TakeDamage(int damage)
     {
         health -= damage;
@@ -65,23 +46,21 @@ public class EnemyBehavior : MonoBehaviour
         {
             Die();
         }
-        
     }
 
     void Die()
     {
-        isDead = true;
         if (self.CompareTag("BigSnake"))
         {
             for(int i = 0; i < 20; ++i)
                 Instantiate(miniSnakes, self.transform.position, Quaternion.identity);
         }
+        Instantiate(heal, gameObject.transform.position, Quaternion.identity);
         Destroy(self);
     }
 
     private void OnTriggerEnter2D (Collider2D hitInfo)
     {
-        //Debug.Log(hitInfo.name);
         playerMoveScript enemy = hitInfo.GetComponent<playerMoveScript>();
         if (enemy != null)
         { 
@@ -91,10 +70,12 @@ public class EnemyBehavior : MonoBehaviour
         if (shrine != null)
         {
             shrine.TakeDamage(damage);
-            Destroy(self);
+            Die();
         }
     }
+
     
+
     Vector3 RayPath(Transform target)
     {
         Vector2 position = transform.position;

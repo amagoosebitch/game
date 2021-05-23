@@ -218,6 +218,7 @@ MonoBehaviour:
   self: {fileID: 0}
   miniSnakes: {fileID: 0}
   deadSound: {fileID: 0}
+  heal: {fileID: 1246151427771843639, guid: 0d8933b5ca8d4994db171fbb02c29baf, type: 3}
 --- !u!70 &7489771767153739476
 CapsuleCollider2D:
   m_ObjectHideFlags: 0
