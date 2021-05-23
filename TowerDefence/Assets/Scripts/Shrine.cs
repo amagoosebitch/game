@@ -9,10 +9,7 @@ public class Shrine : MonoBehaviour
     private int health = 1000;
 
     [SerializeField] private Text hp;
-    void Start()
-    {
-        
-    }
+
 
     // Update is called once per frame
     void Update()

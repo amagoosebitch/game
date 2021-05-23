@@ -13,9 +13,13 @@ public class playerMoveScript : MonoBehaviour
     public int health = 100;
 
     [SerializeField] public Text hp;
+
+    private bool isInvincible = false;
+    private Animator anim;
     void Start()
     {
         rid = GetComponent<Rigidbody2D>();
+        anim = GetComponent<Animator>();
     }
 
     void FixedUpdate()
@@ -55,11 +59,24 @@ public class playerMoveScript : MonoBehaviour
     
     public void TakeDamage(int damage)
     {
-        health -= damage;
-        if (health <= 0)
-            Die();
+        if (!isInvincible)
+        {
+            health -= damage;
+            StartCoroutine(Invincible());
+            if (health <= 0)
+                Die();
+        }
     }
-    
+
+    IEnumerator Invincible()
+    {
+        anim.SetBool("isInvincible", true);
+        isInvincible = true;
+        yield return new WaitForSeconds(1);
+        anim.SetBool("isInvincible", false);
+        isInvincible = false;
+    }
+
     void Die()
     {
         Destroy(gameObject);
