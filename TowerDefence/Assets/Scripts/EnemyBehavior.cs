@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.IO;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using Random = System.Random;
 
 public class EnemyBehavior : MonoBehaviour
 {

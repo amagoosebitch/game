@@ -17,6 +17,7 @@ public class playerMoveScript : MonoBehaviour
 
     private bool isInvincible = false;
     private Animator anim;
+    
     void Start()
     {
         rid = GetComponent<Rigidbody2D>();

@@ -5,16 +5,24 @@ using UnityEngine;
 
 public class Heal : MonoBehaviour
 {
-    // Start is called before the first frame update
+    void Start()
+    {
+        StartCoroutine(LivingTime());
+    }
+
+    IEnumerator LivingTime()
+    {
+        yield return new WaitForSeconds(5);
+        Destroy(gameObject);
+    }
+    
     public void OnTriggerEnter2D(Collider2D other)
     {
         playerMoveScript player = other.GetComponent<playerMoveScript>();
         if (player != null)
         {
-            if (player.health + 2 > 100)
-                player.health = 100;
-            else
-                player.health += 2;
+            if (player.health != 100)
+                player.health++;
             Destroy(gameObject);
         }
     }

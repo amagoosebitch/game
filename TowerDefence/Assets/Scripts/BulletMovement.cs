@@ -24,7 +24,8 @@ public class BulletMovement : MonoBehaviour
         {
             enemy.TakeDamage(damage);
         }
-        Destroy(gameObject);
+        if (hitInfo.GetComponent<Heal>() == null)
+            Destroy(gameObject);
     }
 
     // Update is called once per frame
