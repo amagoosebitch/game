@@ -5,6 +5,7 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.Serialization;
 using Random = UnityEngine.Random;
+using UnityEngine.UI;
 
 public class Spawner : MonoBehaviour
 {
@@ -19,82 +20,97 @@ public class Spawner : MonoBehaviour
     private float expectation;
     private bool flagForStart;
     private int waveCount;
-    
+    private bool waitForWave;
+    [SerializeField] public Text WaveText;
+
     void Start()
     {
+        waitForWave = true;
         expectation = 15;
         smallMobCount = 10;
-        bigMobCount = 1;
-        shootMobCount = 1;
+        bigMobCount = 0;
+        shootMobCount = 0;
         StartCoroutine(WaitForStart());
+        WaveText.text = "Скоро волна!";
     }
 
     IEnumerator WaitForStart()
     {
         yield return new WaitForSeconds(expectation);
         flagForStart = true;
-        expectation += 10;
         waveCount = 0;
     }
 
     void Update()
     {
-        if (!created && flagForStart)
+        if (!created && flagForStart && !GameObject.FindGameObjectWithTag("snake") && 
+            !GameObject.FindGameObjectWithTag("BigSnake") && !GameObject.FindGameObjectWithTag("shootmob"))
         {
-            crt = StartCoroutine(Spawn());
+            if (!waitForWave)
+                StartCoroutine(WaitForWave());
+            else
+                crt = StartCoroutine(Spawn());
         }
+
         if (waveCount == 5)
         {
             StopCoroutine(crt);
             SceneManager.LoadScene("Finish");
         }
-        
     }
-    
-    
+
+    IEnumerator WaitForWave()
+    {
+        WaveText.text = "Скоро волна!";
+        yield return new WaitForSeconds(expectation);
+        waitForWave = true;
+    }
+
     IEnumerator Spawn()
     {
+        WaveText.text = "Волна: " + (waveCount + 1);
         created = true;
-        for (int i = 0; i < smallMobCount; i++)
+        CreateWave(SmallSnake, 
+            new Vector3(-28 + Random.Range(1, 5), 30 - Random.Range(1, 5), 0), 
+            new Vector3(43 - Random.Range(1, 5), 30 - Random.Range(1, 5), 0), 
+            smallMobCount);
+
+        if (waveCount >= 1)
         {
-            if(i % 2 == 0)
-                CreateEnemy(SmallSnake, new Vector3(-30 + Random.Range(0, 5), 
-                    32 - Random.Range(1, 5), 0));
-            else
-                CreateEnemy(SmallSnake, new Vector3(47 - Random.Range(0, 5), 
-                    32 - Random.Range(1, 5), 0));
+            CreateWave(BigSnake, 
+                new Vector3(-30 + Random.Range(1, 5), -29 + Random.Range(1, 5), 0), 
+                new Vector3(45 - Random.Range(1, 5), -29 + Random.Range(1, 5), 0), 
+                bigMobCount);
         }
 
-        for (int i = 0; i < bigMobCount; ++i)
+        if (waveCount >= 2)
         {
-            if(i % 2 == 0)
-                CreateEnemy(BigSnake, new Vector3(-30 + Random.Range(0, 5), 
-                    -29 + Random.Range(1, 5), 0));
-            else
-                CreateEnemy(BigSnake, new Vector3(45 - Random.Range(0, 5), 
-                    -29 + Random.Range(1, 5), 0));
+            CreateWave(ShootMob,  
+                new Vector3(10 + Random.Range(1, 5), -27 + Random.Range(1, 5), 0), 
+                new Vector3(10 - Random.Range(1, 5), 29 - Random.Range(1, 5), 0), 
+                shootMobCount);
         }
+        
 
-        for (int i = 0; i < shootMobCount; ++i)
-        {
-            if(i % 2 == 0)
-                CreateEnemy(ShootMob, new Vector3(10 + Random.Range(0, 5), 
-                    -27 + Random.Range(1, 5), 0));
-            else
-                CreateEnemy(ShootMob, new Vector3(10 - Random.Range(0, 5), 
-                    29 - Random.Range(1, 5), 0));
-        }
         yield return new WaitForSeconds(expectation);
         created = false;
-        expectation += 15;
         smallMobCount += Random.Range(10, 20);
         bigMobCount += Random.Range(1, 3);
         shootMobCount += shootMobCount <= 4 ? Random.Range(1, 2) : 0;
         waveCount += 1;
+        waitForWave = false;
     }
 
     void CreateEnemy(GameObject mob, Vector3 vector)
     {
         Instantiate(mob, vector, Quaternion.identity);
+    }
+
+    void CreateWave(GameObject mob, Vector3 firstVector, Vector3 secondVector, int mobsCount)
+    {
+        for (int i = 0; i < mobsCount; i++)
+        {
+            CreateEnemy(mob, i % 2 == 0 ? firstVector : secondVector);
+        }
     }
 }

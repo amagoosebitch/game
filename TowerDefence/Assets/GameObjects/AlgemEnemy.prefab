@@ -128,7 +128,7 @@ GameObject:
   - component: {fileID: 1412065952088337659}
   m_Layer: 0
   m_Name: AlgemEnemy
-  m_TagString: Untagged
+  m_TagString: shootmob
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -217,7 +217,6 @@ MonoBehaviour:
   damage: 50
   self: {fileID: 0}
   miniSnakes: {fileID: 0}
-  deadSound: {fileID: 0}
   heal: {fileID: 1246151427771843639, guid: 0d8933b5ca8d4994db171fbb02c29baf, type: 3}
 --- !u!70 &7489771767153739476
 CapsuleCollider2D:

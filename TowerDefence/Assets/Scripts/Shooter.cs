@@ -39,10 +39,11 @@ public class Shooter : MonoBehaviour
 
         if (Input.GetKey(KeyCode.R))
         {
+            ammoCount.text = "Перезарядка";
             StartCoroutine(Recharge());
         }
-
-        ammoCount.text = currentBullets + " / " + countBullets;
+        if(shootingFlag)
+            ammoCount.text = currentBullets + " / " + countBullets;
     }
 
     IEnumerator Recharge()

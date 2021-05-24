@@ -98,7 +98,7 @@ GameObject:
   - component: {fileID: 8972838299454687080}
   m_Layer: 0
   m_Name: PythonEnemy
-  m_TagString: Untagged
+  m_TagString: snake
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -223,7 +223,6 @@ MonoBehaviour:
   damage: 10
   self: {fileID: 0}
   miniSnakes: {fileID: 0}
-  deadSound: {fileID: 8300000, guid: 3c5b76fc0c4e04a329cfe2ba8c9a0fd5, type: 3}
   heal: {fileID: 1246151427771843639, guid: 0d8933b5ca8d4994db171fbb02c29baf, type: 3}
 --- !u!82 &8972838299454687080
 AudioSource:
