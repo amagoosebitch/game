@@ -21,7 +21,7 @@ public class EnemyBehavior : MonoBehaviour
     private float collisionDistance = 0.35f;
     private bool blocked = false;
 
-    private Vector2[] dirrections = new[] {Vector2.down, Vector2.left, Vector2.up, Vector2.right};
+    private Vector2[] dirrections = new[] {Vector2.left, Vector2.down,Vector2.right , Vector2.up };
     
     
     public GameObject self;
