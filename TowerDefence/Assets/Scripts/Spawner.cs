@@ -51,16 +51,16 @@ public class Spawner : MonoBehaviour
             else
                 crt = StartCoroutine(Spawn());
         }
-
-        if (waveCount == 5)
-        {
-            StopCoroutine(crt);
-            SceneManager.LoadScene("Finish");
-        }
     }
 
     IEnumerator WaitForWave()
     {
+        if (waveCount == 5)
+        {
+            StopCoroutine(crt);
+            yield return new WaitForSeconds(1);
+            SceneManager.LoadScene("Finish");
+        }
         WaveText.text = "wave soon!";
         yield return new WaitForSeconds(expectation);
         waitForWave = true;
@@ -91,13 +91,13 @@ public class Spawner : MonoBehaviour
                 shootMobCount);
         }
         
-
+        
         yield return new WaitForSeconds(expectation);
+        waveCount += 1;
         created = false;
         smallMobCount += Random.Range(10, 20);
         bigMobCount += Random.Range(1, 3);
         shootMobCount += shootMobCount <= 4 ? Random.Range(1, 2) : 0;
-        waveCount += 1;
         waitForWave = false;
     }
 
