@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class Shrine : MonoBehaviour
@@ -22,9 +23,8 @@ public class Shrine : MonoBehaviour
         health -= damage;
         if (health <= 0)
         {
-            Debug.Log("game over");
             Destroy(gameObject);
+            SceneManager.LoadScene("Fail");
         }
-       // Debug.Log(health);
     }
 }
