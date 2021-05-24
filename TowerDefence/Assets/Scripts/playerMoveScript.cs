@@ -14,6 +14,7 @@ public class playerMoveScript : MonoBehaviour
     public int health = 100;
 
     [SerializeField] public Text hp;
+    [SerializeField] public Text acceleration;
 
     private bool isInvincible = false;
     private Animator anim;
@@ -22,6 +23,7 @@ public class playerMoveScript : MonoBehaviour
     {
         rid = GetComponent<Rigidbody2D>();
         anim = GetComponent<Animator>();
+        acceleration.text = "available";
     }
 
     void FixedUpdate()
@@ -29,6 +31,8 @@ public class playerMoveScript : MonoBehaviour
         Move();
         if (Input.GetKey(KeyCode.Space) && opportunityAcceleration)
         {
+            acceleration.text = "recharge";
+            acceleration.color = Color.green;
             MakeAcceleration();
         }
 
@@ -46,8 +50,11 @@ public class playerMoveScript : MonoBehaviour
         opportunityAcceleration = false;
         yield return new WaitForSeconds(5);
         speed = currentSpeed;
+        acceleration.color = Color.blue;
         yield return new WaitForSeconds(15);
         opportunityAcceleration = true;
+        acceleration.text = "available";
+        acceleration.color = Color.black;
 
     }
 
