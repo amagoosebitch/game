@@ -5,6 +5,7 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.Serialization;
 using Random = UnityEngine.Random;
+using UnityEngine.UI;
 
 public class Spawner : MonoBehaviour
 {
@@ -20,6 +21,7 @@ public class Spawner : MonoBehaviour
     private bool flagForStart;
     private int waveCount;
     private bool waitForWave;
+    [SerializeField] public Text WaveText;
 
     void Start()
     {
@@ -29,6 +31,7 @@ public class Spawner : MonoBehaviour
         bigMobCount = 0;
         shootMobCount = 0;
         StartCoroutine(WaitForStart());
+        WaveText.text = "Скоро волна!";
     }
 
     IEnumerator WaitForStart()
@@ -58,12 +61,14 @@ public class Spawner : MonoBehaviour
 
     IEnumerator WaitForWave()
     {
+        WaveText.text = "Скоро волна!";
         yield return new WaitForSeconds(expectation);
         waitForWave = true;
     }
 
     IEnumerator Spawn()
     {
+        WaveText.text = "Волна: " + (waveCount + 1);
         created = true;
         CreateWave(SmallSnake, 
             new Vector3(-28 + Random.Range(1, 5), 30 - Random.Range(1, 5), 0), 
