@@ -108,7 +108,7 @@ public class EnemyBehavior : MonoBehaviour
                             offset = 3;
                     for (var i = 0; i < 4; i++)
                     {
-                        escapeDirection = Vector2.left;
+                        escapeDirection = Vector2.down;
                         var temp = Physics2D.Raycast(position, 
                             dirrections[(i + offset) % 4], collisionDistance, _layerMask);
                         if (temp.collider is null)
