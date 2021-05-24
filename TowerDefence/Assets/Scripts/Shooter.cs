@@ -14,6 +14,7 @@ public class Shooter : MonoBehaviour
     private int currentBullets;
     private bool shootingFlag;
     public AudioClip fireSound;
+    public AudioClip reloadSound;
 
     [SerializeField] public Text ammoCount;
 
@@ -37,9 +38,9 @@ public class Shooter : MonoBehaviour
             StopCoroutine(fireSequence);
         }
 
-        if (Input.GetKey(KeyCode.R))
+        if (Input.GetKey(KeyCode.R) && shootingFlag)
         {
-            ammoCount.text = "Перезарядка";
+            ammoCount.text = "Reload";
             StartCoroutine(Recharge());
         }
         if(shootingFlag)
@@ -49,6 +50,7 @@ public class Shooter : MonoBehaviour
     IEnumerator Recharge()
     {
         shootingFlag = false;
+        GetComponent<AudioSource>().PlayOneShot(reloadSound);
         yield return new WaitForSeconds(recharge);
         currentBullets = countBullets;
         shootingFlag = true;
