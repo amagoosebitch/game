@@ -6,6 +6,8 @@ TagManager:
   tags:
   - BigSnake
   - heal
+  - shootmob
+  - snake
   layers:
   - Default
   - TransparentFX
