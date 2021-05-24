@@ -35,10 +35,10 @@ public class cameraFollowPlayerScript : MonoBehaviour
     private void ShiftLook()
     {
         var direction = Camera.main.ScreenToWorldPoint(
-            new Vector3(Input.mousePosition.x, Input.mousePosition.y, -10)) - transform.position;
+            new Vector3(Input.mousePosition.x, Input.mousePosition.y, 0)) - transform.position;
         if(player.GetComponent<SpriteRenderer>().isVisible)
             transform.Translate(direction*2*Time.deltaTime);
-        
+
     }
 
     void cameraFollow()

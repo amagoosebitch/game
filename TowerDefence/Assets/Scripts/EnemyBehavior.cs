@@ -114,6 +114,7 @@ public class EnemyBehavior : MonoBehaviour
                         if (temp.collider is null)
                         {
                             escapeDirection = dirrections[(i + offset) % 4];
+                            return escapeDirection;
                         }
                     }
 
