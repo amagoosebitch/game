@@ -22,4 +22,9 @@ public class MenuScript : MonoBehaviour
     {
         SceneManager.LoadScene("Menu");
     }
+    
+    public void LoadTrainig()
+    {
+        SceneManager.LoadScene("Scenes/Training");
+    }
 }

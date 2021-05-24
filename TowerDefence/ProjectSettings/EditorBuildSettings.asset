@@ -17,4 +17,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Fail.unity
     guid: 649524bd25ba93005bad31e9d4d740df
+  - enabled: 1
+    path: Assets/Scenes/Training.unity
+    guid: f6ca9f111c4939cad8ca849c00b08034
   m_configObjects: {}
