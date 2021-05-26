@@ -47,7 +47,7 @@ public class ShootingEnemy : MonoBehaviour
         }
     }
     
-    void RotateFace()
+    public void RotateFace()
     {
         var playerPosition = player.transform.position;
         var difference = playerPosition - transform.position; 
