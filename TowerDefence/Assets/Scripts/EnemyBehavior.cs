@@ -37,7 +37,8 @@ public class EnemyBehavior : MonoBehaviour
 
     void Update()
     {
-        transform.position =  transform.position + speed * Time.deltaTime * RayPath(shrine.transform);
+        if (shrine != null)
+            transform.position =  transform.position + speed * Time.deltaTime * RayPath(shrine.transform);
     }
     
     public void TakeDamage(int damage)
@@ -51,13 +52,14 @@ public class EnemyBehavior : MonoBehaviour
 
     void Die()
     {
-        if (self.CompareTag("BigSnake"))
+        if (gameObject.tag == "BigSnake")
         {
             for(int i = 0; i < 20; ++i)
                 Instantiate(miniSnakes, self.transform.position, Quaternion.identity);
         }
-        Instantiate(heal, gameObject.transform.position, Quaternion.identity);
-        Destroy(self);
+        if (heal != null)
+            Instantiate(heal, gameObject.transform.position, Quaternion.identity);
+        Destroy(gameObject);
     }
 
     private void OnTriggerEnter2D (Collider2D hitInfo)
