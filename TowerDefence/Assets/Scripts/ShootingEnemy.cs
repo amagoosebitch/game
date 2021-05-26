@@ -5,13 +5,13 @@ using System;
 
 public class ShootingEnemy : MonoBehaviour
 {
-    private GameObject player;
+    public GameObject player;
     public GameObject Vector;
     private bool flag = true;
     private Coroutine fire;
     public Transform firePoint;
     
-    void Start()
+    public void Start()
     {
         player = GameObject.Find("player");
     }
@@ -42,7 +42,8 @@ public class ShootingEnemy : MonoBehaviour
         {
             var destination = gameObject.transform.right;
             destination.Normalize();
-            Instantiate(Vector, firePoint.position, firePoint.rotation);
+            if (Vector != null && firePoint != null)
+                Instantiate(Vector, firePoint.position, firePoint.rotation);
             yield return new WaitForSeconds(1f);
         }
     }

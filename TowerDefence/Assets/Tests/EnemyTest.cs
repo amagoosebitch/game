@@ -52,9 +52,10 @@ public class EnemyTest
         var player = new GameObject();
         var vector = new GameObject();
         vector.AddComponent<VectorBehaviour>();
-        enemy.Vector = vector;
         player.name = "player";
         player.transform.position = new Vector3(3f, 4f, 0);
+        enemy.player = player;
+        enemy.Vector = vector;
         enemy.RotateFace();
         Assert.That(Math.Abs(enemy.transform.rotation.z) > 0);
         yield return null;
