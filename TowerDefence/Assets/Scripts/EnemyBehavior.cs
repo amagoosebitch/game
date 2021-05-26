@@ -12,7 +12,7 @@ public class EnemyBehavior : MonoBehaviour
     public int health = 10;
     public int damage = 10;
     
-    private GameObject shrine;
+    public GameObject shrine;
     private Vector3 pos;
     private Vector3 direction;
     Vector2 blockDirection,escapeDirection;

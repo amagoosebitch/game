@@ -60,4 +60,22 @@ public class EnemyTest
         Assert.That(Math.Abs(enemy.transform.rotation.z) > 0);
         yield return null;
     }
+    
+    [UnityTest]
+    public IEnumerator EnemyTestMoves()
+    {
+        var go = new GameObject();
+        var gameObject = MonoBehaviour.Instantiate(go);
+        var enemy = gameObject.AddComponent<EnemyBehavior>();
+        var shrine = new GameObject();
+        shrine.name = "Shrine";
+        enemy.transform.position = new Vector3(3f, 4f, 0);
+        enemy.shrine = shrine;
+        yield return null;
+        var pos = gameObject.transform.position;
+        Assert.Less(pos.x, 3f);
+        Assert.Less(pos.y, 4f);
+        Assert.That(Math.Abs(pos.z) < 0 + Double.Epsilon);
+
+    }
 }
