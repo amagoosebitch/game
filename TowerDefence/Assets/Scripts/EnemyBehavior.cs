@@ -18,7 +18,7 @@ public class EnemyBehavior : MonoBehaviour
     Vector2 blockDirection,escapeDirection;
     RaycastHit2D hit;
     private LayerMask _layerMask = 1 << 3;
-    private float collisionDistance = 0.35f;
+    private float collisionDistance = 0.3f;
     private bool blocked = false;
 
     private Vector2[] dirrections = new[] {Vector2.left, Vector2.down,Vector2.right , Vector2.up };

@@ -7,7 +7,7 @@ using UnityEngine.UI;
 public class Shrine : MonoBehaviour
 {
     // Start is called before the first frame update
-    private int health = 1000;
+    private int health = 1000000;
 
     [SerializeField] private Text hp;
 

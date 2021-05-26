@@ -55,7 +55,7 @@ public class Spawner : MonoBehaviour
 
     IEnumerator WaitForWave()
     {
-        if (waveCount == 5)
+        if (waveCount == 6)
         {
             StopCoroutine(crt);
             yield return new WaitForSeconds(1);
@@ -70,25 +70,25 @@ public class Spawner : MonoBehaviour
     {
         WaveText.text = "Wave: " + (waveCount + 1);
         created = true;
-        CreateWave(SmallSnake, 
+        StartCoroutine( CreateWave(SmallSnake, 
             new Vector3(-28 + Random.Range(1, 5), 30 - Random.Range(1, 5), 0), 
             new Vector3(43 - Random.Range(1, 5), 30 - Random.Range(1, 5), 0), 
-            smallMobCount);
+            smallMobCount));
 
         if (waveCount >= 1)
         {
-            CreateWave(BigSnake, 
+            StartCoroutine(CreateWave(BigSnake, 
                 new Vector3(-30 + Random.Range(1, 5), -29 + Random.Range(1, 5), 0), 
                 new Vector3(45 - Random.Range(1, 5), -29 + Random.Range(1, 5), 0), 
-                bigMobCount);
+                bigMobCount));
         }
 
         if (waveCount >= 2)
         {
-            CreateWave(ShootMob,  
+            StartCoroutine(CreateWave(ShootMob,  
                 new Vector3(10 + Random.Range(1, 5), -27 + Random.Range(1, 5), 0), 
                 new Vector3(10 - Random.Range(1, 5), 29 - Random.Range(1, 5), 0), 
-                shootMobCount);
+                shootMobCount));
         }
         
         
@@ -106,11 +106,12 @@ public class Spawner : MonoBehaviour
         Instantiate(mob, vector, Quaternion.identity);
     }
 
-    void CreateWave(GameObject mob, Vector3 firstVector, Vector3 secondVector, int mobsCount)
+    IEnumerator CreateWave(GameObject mob, Vector3 firstVector, Vector3 secondVector, int mobsCount)
     {
         for (int i = 0; i < mobsCount; i++)
         {
             CreateEnemy(mob, i % 2 == 0 ? firstVector : secondVector);
+            yield return new WaitForSeconds(Random.Range(0.05f, 0.5f) / (waveCount + 1));
         }
     }
 }
