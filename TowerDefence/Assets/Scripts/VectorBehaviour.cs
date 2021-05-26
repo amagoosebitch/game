@@ -11,7 +11,7 @@ public class VectorBehaviour : MonoBehaviour
     private GameObject player;
     void Start()
     {
-        if (rb.name != "AlgemEnemy")
+        if (rb != null && rb.name != "AlgemEnemy")
             rb.velocity = transform.right * speed;
     }
 
