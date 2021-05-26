@@ -55,7 +55,7 @@ public class EnemyBehavior : MonoBehaviour
         if (gameObject.tag == "BigSnake")
         {
             for(int i = 0; i < 20; ++i)
-                Instantiate(miniSnakes, self.transform.position, Quaternion.identity);
+                Instantiate(miniSnakes, gameObject.transform.position, Quaternion.identity);
         }
         if (heal != null)
             Instantiate(heal, gameObject.transform.position, Quaternion.identity);
