@@ -21,7 +21,7 @@ public class wallCreater : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetKey(KeyCode.E) && !added)
+        if (Time.timeScale != 0 && Input.GetKey(KeyCode.E) && !added)
         {
             CreateWall();
         }

@@ -45,7 +45,7 @@ public class Spawner : MonoBehaviour
 
     void Update()
     {
-        if (!created && flagForStart && !GameObject.FindGameObjectWithTag("snake") && 
+        if (Time.timeScale != 0 && !created && flagForStart && !GameObject.FindGameObjectWithTag("snake") && 
             !GameObject.FindGameObjectWithTag("BigSnake") && !GameObject.FindGameObjectWithTag("shootmob"))
         {
             if (!waitForWave)

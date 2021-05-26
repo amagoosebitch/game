@@ -13,7 +13,8 @@ public class FollowCursorScript : MonoBehaviour
 
     void Update()
     {
-        RotateToMousePosition();
+        if (Time.timeScale != 0)
+            RotateToMousePosition();
     }
 
     void RotateToMousePosition()

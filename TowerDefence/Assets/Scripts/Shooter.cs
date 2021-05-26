@@ -27,25 +27,29 @@ public class Shooter : MonoBehaviour
 
     void Update()
     {
-        if (ammoCount != null)
+        if (Time.timeScale != 0)
         {
-            if (shootingFlag && Input.GetMouseButtonDown(0))
+            if (ammoCount != null)
             {
-                fireSequence = StartCoroutine(Shoot());
-            }
+                if (shootingFlag && Input.GetMouseButtonDown(0))
+                {
+                    fireSequence = StartCoroutine(Shoot());
+                }
 
-            if (Input.GetMouseButtonUp(0) && fireSequence != null)
-            {
-                StopCoroutine(fireSequence);
-            }
+                if (Input.GetMouseButtonUp(0) && fireSequence != null)
+                {
+                    StopCoroutine(fireSequence);
+                }
 
-            if (Input.GetKey(KeyCode.R) && shootingFlag)
-            {
-                ammoCount.text = "Reload";
-                StartCoroutine(Recharge());
+                if (Input.GetKey(KeyCode.R) && shootingFlag)
+                {
+                    ammoCount.text = "Reload";
+                    StartCoroutine(Recharge());
+                }
+
+                if (shootingFlag)
+                    ammoCount.text = currentBullets + " / " + countBullets;
             }
-            if(shootingFlag)
-                ammoCount.text = currentBullets + " / " + countBullets;   
         }
     }
 

@@ -28,12 +28,15 @@ public class playerMoveScript : MonoBehaviour
 
     void FixedUpdate()
     {
-        Move();
-        if (Input.GetKey(KeyCode.Space) && opportunityAcceleration)
+        if (Time.timeScale != 0)
         {
-            acceleration.text = "recharge";
-            acceleration.color = Color.green;
-            MakeAcceleration();
+            Move();
+            if (Input.GetKey(KeyCode.Space) && opportunityAcceleration)
+            {
+                acceleration.text = "recharge";
+                acceleration.color = Color.green;
+                MakeAcceleration();
+            }
         }
 
         hp.text = health + " / " + "100";
