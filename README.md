@@ -13,7 +13,7 @@ Aвторы:
 # Требования
 Операционная система Windows
 
-запуск: 
+запуск: ToweDefence.exe
 
 # Состав
 
@@ -46,3 +46,4 @@ Aвторы:
 8. ESC - пауза
 
 # Ссылка на .exe файл
+https://drive.google.com/file/d/1GUsp3q6YTTbD18xAuCcscTN-LhOTWfxn/view
