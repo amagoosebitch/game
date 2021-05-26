@@ -11,8 +11,8 @@ public class Shooter : MonoBehaviour
     private float fireDelay = 0.1f;
     public int countBullets;
     private float recharge = 2.0f;
-    private int currentBullets;
-    private bool shootingFlag;
+    public int currentBullets;
+    public bool shootingFlag;
     public AudioClip fireSound;
     public AudioClip reloadSound;
 
@@ -27,43 +27,48 @@ public class Shooter : MonoBehaviour
 
     void Update()
     {
-        
-        if (shootingFlag && Input.GetMouseButtonDown(0))
+        if (ammoCount != null)
         {
-            fireSequence = StartCoroutine(Shoot());
-        }
+            if (shootingFlag && Input.GetMouseButtonDown(0))
+            {
+                fireSequence = StartCoroutine(Shoot());
+            }
 
-        if (Input.GetMouseButtonUp(0) && fireSequence != null)
-        {
-            StopCoroutine(fireSequence);
-        }
+            if (Input.GetMouseButtonUp(0) && fireSequence != null)
+            {
+                StopCoroutine(fireSequence);
+            }
 
-        if (Input.GetKey(KeyCode.R) && shootingFlag)
-        {
-            ammoCount.text = "Reload";
-            StartCoroutine(Recharge());
+            if (Input.GetKey(KeyCode.R) && shootingFlag)
+            {
+                ammoCount.text = "Reload";
+                StartCoroutine(Recharge());
+            }
+            if(shootingFlag)
+                ammoCount.text = currentBullets + " / " + countBullets;   
         }
-        if(shootingFlag)
-            ammoCount.text = currentBullets + " / " + countBullets;
     }
 
-    IEnumerator Recharge()
+    public IEnumerator Recharge()
     {
         shootingFlag = false;
-        GetComponent<AudioSource>().PlayOneShot(reloadSound);
+        if(reloadSound != null)
+            GetComponent<AudioSource>().PlayOneShot(reloadSound);
         yield return new WaitForSeconds(recharge);
         currentBullets = countBullets;
         shootingFlag = true;
     }
 
-    IEnumerator Shoot()
+    public IEnumerator Shoot()
     {
         while (true)
         {
             if (currentBullets <= 0)
                 yield break;
-            Instantiate(bullet, firePoint.position, firePoint.rotation);
-            GetComponent<AudioSource>().PlayOneShot(fireSound);
+            if(bullet != null)
+                Instantiate(bullet, firePoint.position, firePoint.rotation);
+            if(firePoint != null)
+                GetComponent<AudioSource>().PlayOneShot(fireSound);
             currentBullets--;
             yield return new WaitForSeconds(fireDelay);
         }

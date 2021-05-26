@@ -6,7 +6,7 @@ using UnityEngine.UI;
 public class wallCreater : MonoBehaviour
 {
     public Transform firePoint;
-    private bool added;
+    public bool added;
     public GameObject playerWall;
     private int waitTime;
     [SerializeField] public Text wallCount;
@@ -15,14 +15,23 @@ public class wallCreater : MonoBehaviour
     {
         waitTime = 30;
         added = false;
-        wallCount.text = "available";
+        if(wallCount != null)
+            wallCount.text = "available";
     }
 
     void Update()
     {
         if (Input.GetKey(KeyCode.E) && !added)
         {
-            added = true;
+            CreateWall();
+        }
+    }
+
+    public void CreateWall()
+    {
+        added = true;
+        if (wallCount != null)
+        {
             wallCount.text = "recharge";
             wallCount.color = Color.blue;
             Instantiate(playerWall, firePoint.position, firePoint.rotation);
