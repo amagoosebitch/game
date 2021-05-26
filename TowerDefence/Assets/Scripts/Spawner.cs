@@ -1,11 +1,13 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using TreeEditor;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.Serialization;
-using Random = UnityEngine.Random;
 using UnityEngine.UI;
+using Random = UnityEngine.Random;
+
 
 public class Spawner : MonoBehaviour
 {
@@ -71,23 +73,23 @@ public class Spawner : MonoBehaviour
         WaveText.text = "Wave: " + (waveCount + 1);
         created = true;
         StartCoroutine( CreateWave(SmallSnake, 
-            new Vector3(-28 + Random.Range(1, 5), 30 - Random.Range(1, 5), 0), 
-            new Vector3(43 - Random.Range(1, 5), 30 - Random.Range(1, 5), 0), 
+            new Vector3(-28, 30, 0), 
+            new Vector3(43, 30, 0), 
             smallMobCount));
 
         if (waveCount >= 1)
         {
             StartCoroutine(CreateWave(BigSnake, 
-                new Vector3(-30 + Random.Range(1, 5), -29 + Random.Range(1, 5), 0), 
-                new Vector3(45 - Random.Range(1, 5), -29 + Random.Range(1, 5), 0), 
+                new Vector3(-20, -25, 0), 
+                new Vector3(30, -23, 0), 
                 bigMobCount));
         }
 
         if (waveCount >= 2)
         {
             StartCoroutine(CreateWave(ShootMob,  
-                new Vector3(10 + Random.Range(1, 5), -27 + Random.Range(1, 5), 0), 
-                new Vector3(10 - Random.Range(1, 5), 29 - Random.Range(1, 5), 0), 
+                new Vector3(10, -25, 0), 
+                new Vector3(10, 25, 0), 
                 shootMobCount));
         }
         
@@ -95,9 +97,9 @@ public class Spawner : MonoBehaviour
         yield return new WaitForSeconds(expectation);
         waveCount += 1;
         created = false;
-        smallMobCount += Random.Range(10, 20);
+        smallMobCount += Random.Range(10, 25);
         bigMobCount += Random.Range(1, 3);
-        shootMobCount += shootMobCount <= 4 ? Random.Range(1, 2) : 0;
+        shootMobCount += shootMobCount <= 6 ? Random.Range(1, 2) : 0;
         waitForWave = false;
     }
 
@@ -110,8 +112,9 @@ public class Spawner : MonoBehaviour
     {
         for (int i = 0; i < mobsCount; i++)
         {
-            CreateEnemy(mob, i % 2 == 0 ? firstVector : secondVector);
-            yield return new WaitForSeconds(Random.Range(0.05f, 0.5f) / (waveCount + 1));
+            CreateEnemy(mob, i % 2 == 0 ? firstVector + new Vector3(Random.Range(-2,2) , Random.Range(-2,2) , 0)
+                : secondVector + new Vector3(Random.Range(-2,2) , Random.Range(-2,2) , 0));
+            yield return new WaitForSeconds(Random.Range(0.05f, 0.4f) / (waveCount + 1));
         }
     }
 }
